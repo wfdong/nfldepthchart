@@ -12,7 +12,7 @@ public class NFLUtilsTest {
         assertEquals(true, NFLUtils.isValidPosition("LG"));
         assertEquals(true, NFLUtils.isValidPosition("C"));
         assertEquals(true, NFLUtils.isValidPosition("RG"));
-        \assertEquals(true, NFLUtils.isValidPosition("RT"));
+        assertEquals(true, NFLUtils.isValidPosition("RT"));
         assertEquals(true, NFLUtils.isValidPosition("TE"));
         assertEquals(true, NFLUtils.isValidPosition("QB"));
         assertEquals(true, NFLUtils.isValidPosition("RB"));

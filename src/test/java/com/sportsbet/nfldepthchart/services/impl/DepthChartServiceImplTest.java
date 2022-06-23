@@ -7,11 +7,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.sportsbet.nfldepthchart.dao.DataBaseMock;
 import com.sportsbet.nfldepthchart.models.Player;
 import com.sportsbet.nfldepthchart.services.DepthChartService;
 
@@ -19,6 +22,9 @@ public class DepthChartServiceImplTest {
     DepthChartService depthChartService;
     static Player TomBrady, BlaineGabbert, KyleTrask, MikeEvans, JaelonDarden, ScottMiller;
 
+    @Mock
+    DataBaseMock dataBaseMock;
+    
     @BeforeAll
     static void initAll() {
     }
@@ -26,6 +32,8 @@ public class DepthChartServiceImplTest {
     @BeforeEach
     void init() {
         depthChartService = new DepthChartServiceImpl();
+        dataBaseMock = new DataBaseMock();
+        ReflectionTestUtils.setField(depthChartService, "dataBaseMock", dataBaseMock);
         addPlayersToDepthChars();
     }
 
@@ -44,7 +52,7 @@ public class DepthChartServiceImplTest {
         Player LeverettNick = new Player();
         LeverettNick.setName("Leverett Nick");
         LeverettNick.setNumber(60);
-        assertEquals(true, depthChartService.addPlayerToDepthChart("LG", LeverettNick, null));
+        assertEquals(true, depthChartService.addPlayerToDepthChart("LG", LeverettNick));
         assertNotNull(depthChartService.getFullDepthChart());
 
         Player EvansMike = new Player();
@@ -53,7 +61,7 @@ public class DepthChartServiceImplTest {
         List<String> positions = new ArrayList<String>();
         positions.add("LWR");
         EvansMike.setPosition(positions);
-        assertEquals(false, depthChartService.addPlayerToDepthChart("LG", EvansMike, null));
+        assertEquals(false, depthChartService.addPlayerToDepthChart("LG", EvansMike));
         assertNotNull(depthChartService.getFullDepthChart());
     }
 

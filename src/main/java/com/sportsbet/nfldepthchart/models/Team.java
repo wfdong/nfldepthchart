@@ -5,7 +5,20 @@ import java.util.Map;
 
 public class Team {
     private String teamName;
-    private  Map<String, List<Player>> players;
+
+    /*
+     * A mapping between position and the list of players in this position
+     * key--position
+     * value--List of the player numbers
+     */
+    private Map<String, List<Integer>> playersOfPosition;
+
+    /*
+     * A mapping of all players in this team
+     * key--number
+     * value--player
+     */
+    private Map<Integer, Player> allPlayers;
 
     public String getTeamName() {
         return teamName;
@@ -13,10 +26,18 @@ public class Team {
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
-    public Map<String, List<Player>> getPlayers() {
-        return players;
+
+    public Map<String, List<Integer>> getPlayersOfPosition() {
+        return playersOfPosition;
     }
-    public void setPlayers(Map<String, List<Player>> players) {
-        this.players = players;
+    public void setPlayersOfPosition(Map<String, List<Integer>> playersOfPosition) {
+        this.playersOfPosition = playersOfPosition;
+    }
+
+    public Map<Integer, Player> getAllPlayers() {
+        return allPlayers;
+    }
+    public void setAllPlayers(Map<Integer, Player> allPlayers) {
+        this.allPlayers = allPlayers;
     }
 }
