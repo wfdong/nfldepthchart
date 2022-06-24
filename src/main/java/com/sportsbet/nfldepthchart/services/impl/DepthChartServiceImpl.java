@@ -54,7 +54,7 @@ public class DepthChartServiceImpl implements DepthChartService {
         }
 
         //update position
-        addNewPositionForPlayer(team, player.getNumber(), position);
+        addNewPositionForPlayer(team, player.getNumber(), position, player);
         return true;
     }
 
@@ -76,7 +76,7 @@ public class DepthChartServiceImpl implements DepthChartService {
         Map<String, List<Integer>> players = team.getPlayersOfPosition();
         players.computeIfAbsent(position, key->new ArrayList<>());
         players.get(position).add(newPlayerNumber);
-        addNewPositionForPlayer(team, player.getNumber(), position);
+        addNewPositionForPlayer(team, player.getNumber(), position, player);
         return true;
     }
 
@@ -109,7 +109,7 @@ public class DepthChartServiceImpl implements DepthChartService {
     /*
      * Once a new position added, need to update Player meta info accordinglly
      */
-    private void addNewPositionForPlayer(Team team, int number, String newPosition){
+    private void addNewPositionForPlayer(Team team, int number, String newPosition, Player playerPassin){
         Map<Integer, Player> allPlayers = team.getAllPlayers();
         Player player = allPlayers.get(number);
         if(player!=null){
@@ -117,6 +117,15 @@ public class DepthChartServiceImpl implements DepthChartService {
             if(!positions.contains(newPosition)){
                 positions.add(newPosition);
             }
+        }else {
+            // if this player not existing there, that means the first time to add
+            Player newPlayer = new Player();
+            newPlayer.setName(playerPassin.getName());
+            newPlayer.setNumber(number);
+            List<String> positions = new ArrayList<>();
+            positions.add(newPosition);
+            newPlayer.setPosition(positions);
+            team.getAllPlayers().put(number, newPlayer);
         }
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ResponseData implements Serializable{
+    private static final long serialVersionUID = 5926468583005150709L;
     private Map<Object, Object> response;
 
     public Map<Object, Object> getResponse() {

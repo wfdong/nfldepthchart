@@ -3,6 +3,9 @@ package com.sportsbet.nfldepthchart.models;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Player implements Serializable{
     public Player(){}
 

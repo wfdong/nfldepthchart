@@ -5,6 +5,7 @@ import com.sportsbet.nfldepthchart.models.RequestData;
 import com.sportsbet.nfldepthchart.models.ResponseData;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /*
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @RestController
 public class NFLDepthChartController {
+    @Autowired
+    ResponseData responseData;
+
     @PostMapping(value="/addplayer")
     public ResponseData addPlayer(@RequestBody RequestData requestData) {
         //TODO: process POST request
