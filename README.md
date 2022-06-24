@@ -146,3 +146,20 @@ Http Header:
 {
     content-type: application/json
 }
+
+few snapshots:
+![image](https://user-images.githubusercontent.com/7520014/175550311-21ddf541-abeb-43f1-9bdf-d406b5b93dc7.png)
+![image](https://user-images.githubusercontent.com/7520014/175550418-81cde2c8-2632-49bd-a1db-61e0d9b902a7.png)
+![image](https://user-images.githubusercontent.com/7520014/175550485-0e157ca1-6612-4a5b-aacc-fd33a2d57fe0.png)
+![image](https://user-images.githubusercontent.com/7520014/175550698-3ea48283-6207-414e-9b50-a5eeb85aac6a.png)
+
+docker containerization:
+<img width="1088" alt="image" src="https://user-images.githubusercontent.com/7520014/175551162-bb077d50-f643-4633-b167-757780cdebc7.png">
+![image](https://user-images.githubusercontent.com/7520014/175551320-da6da6fe-32d3-4b6c-9a63-46f7be7e1ab3.png)
+
+
+
+
+
+
+}
