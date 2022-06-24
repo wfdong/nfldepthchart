@@ -33,7 +33,7 @@ public class DepthChartServiceImpl implements DepthChartService {
             || player == null
             || player.getName() == null
             || player.getNumber() < 0
-            || (player.getPosition()!=null&&!player.getPosition().equals(position))){
+            || (player.getPosition()!=null&&!player.getPosition().contains(position))){
             // if the request parameter is invalid then return false
             return false;
         }
@@ -67,7 +67,7 @@ public class DepthChartServiceImpl implements DepthChartService {
             || player == null
             || player.getName() == null
             || player.getNumber() < 0
-            || (player.getPosition()!=null&&!player.getPosition().equals(position))){
+            || (player.getPosition()!=null&&!player.getPosition().contains(position))){
             // if the request parameter is invalid then return false
             return false;
         }
@@ -82,7 +82,30 @@ public class DepthChartServiceImpl implements DepthChartService {
 
     @Override
     public Player removePlayerFromDepthChart(String position, Player player) {
-        // TODO Auto-generated method stub
+        if(!NFLUtils.isValidPosition(position) 
+            || player == null
+            || player.getName() == null
+            || player.getNumber() < 0
+            || (player.getPosition()!=null&&!player.getPosition().contains(position))){
+            // if the request parameter is invalid then return null
+            return null;
+        }
+        Team team = dataBaseMock.getTeam();
+        int playerNumber = player.getNumber();
+        Map<String, List<Integer>> players = team.getPlayersOfPosition();
+        Map<Integer, Player> allPlayers = team.getAllPlayers();
+
+        // only remove this player from the position, should not remove from the team
+        List<Integer> playersInThisPos = players.get(position);
+        if(playersInThisPos!=null && playersInThisPos.contains(playerNumber)){
+            playersInThisPos.remove(Integer.valueOf(playerNumber));
+        }
+        
+        // update the team information, update this player's position list
+        Player playerStored = allPlayers.get(playerNumber);
+        if(playerStored!=null && playerStored.getPosition()!=null && playerStored.getPosition().remove(position)){
+            return playerStored;
+        }
         return null;
     }
 
