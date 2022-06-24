@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Player implements Serializable{
     public Player(){}
 

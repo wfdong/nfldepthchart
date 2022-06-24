@@ -3,14 +3,16 @@ package com.sportsbet.nfldepthchart.models;
 import java.io.Serializable;
 
 import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RequestData implements Serializable{
     private static final long serialVersionUID = 5926468583005150707L;
 
     private Player player;
     private String position;
-    private Integer positionDepth;
+    private Integer positionDepth = -1;
 
     public Player getPlayer() {
         return player;

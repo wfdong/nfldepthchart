@@ -1,40 +1,51 @@
 package com.sportsbet.nfldepthchart.controllers;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sportsbet.nfldepthchart.dao.DataBaseMock;
 import com.sportsbet.nfldepthchart.models.Player;
 import com.sportsbet.nfldepthchart.models.RequestData;
 import com.sportsbet.nfldepthchart.services.DepthChartService;
+import com.sportsbet.nfldepthchart.services.impl.DepthChartServiceImpl;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /*
  * Integration test cases
  */
 @AutoConfigureMockMvc
-@SpringBootTest
+@SpringBootTest(properties = "spring.main.allow-bean-definition-overriding=true")
 public class NFLDepthChartControllerTest {
     @Autowired
 	private MockMvc mvc;
 
-    @MockBean
+    @Mock
     DepthChartService depthChartService;
 
     @Autowired
     private RequestData requestData;
+
+    @Mock
+    DataBaseMock dataBaseMock;
+
+    @BeforeEach
+    void init() {
+        depthChartService = new DepthChartServiceImpl();
+        dataBaseMock = new DataBaseMock();
+        ReflectionTestUtils.setField(depthChartService, "dataBaseMock", dataBaseMock);
+    }
 
     @Test
     void testAddPlayer() throws Exception{
@@ -50,7 +61,8 @@ public class NFLDepthChartControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$").isNotEmpty())
-            .andExpect(jsonPath("$.response.StatusCode").isNotEmpty());
+            .andExpect(jsonPath("$.response.StatusCode").isNotEmpty())
+            .andExpect(jsonPath("$.response.StatusCode").value("0"));
     }
 
     @Test
@@ -66,7 +78,8 @@ public class NFLDepthChartControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$").isNotEmpty())
-            .andExpect(jsonPath("$.response.StatusCode").isNotEmpty());
+            .andExpect(jsonPath("$.response.StatusCode").isNotEmpty())
+            .andExpect(jsonPath("$.response.StatusCode").value("0"));
     }
 
     @Test
@@ -76,20 +89,36 @@ public class NFLDepthChartControllerTest {
         TomBrady.setNumber(12);
         requestData.setPlayer(TomBrady);
         requestData.setPosition("QB");
+        mvc.perform(MockMvcRequestBuilders
+            .post("/addplayer")
+            .content(asJsonString(requestData))
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON));
 
         Player BlaineGabbert = new Player();
         BlaineGabbert.setName("Blaine Gabbert");
         BlaineGabbert.setNumber(11);
+        requestData.setPlayer(BlaineGabbert);
+        requestData.setPosition("QB");
+        mvc.perform(MockMvcRequestBuilders
+            .post("/addplayer")
+            .content(asJsonString(requestData))
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON));
+
+        requestData.setPlayer(TomBrady);
+        requestData.setPosition("QB");
         List<String> backups = new ArrayList<String>();
         backups.add("11-Blaine Gabbert");
-        Mockito.when(depthChartService.getBackups("QB", TomBrady)).thenReturn(backups);
+        //Mockito.when(depthChartService.getBackups("QB", TomBrady)).thenReturn(backups);
         mvc.perform(MockMvcRequestBuilders
             .post("/getbackups")
             .content(asJsonString(requestData))
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$").isNotEmpty())
-            .andExpect(jsonPath("$.response.StatusCode").isNotEmpty());
+            .andExpect(jsonPath("$.response.StatusCode").isNotEmpty())
+            .andExpect(jsonPath("$.response.StatusCode").value("0"));
     }
 
     @Test
@@ -97,22 +126,32 @@ public class NFLDepthChartControllerTest {
         Player TomBrady = new Player();
         TomBrady.setName("Tom Brady");
         TomBrady.setNumber(12);
+        requestData.setPlayer(TomBrady);
+        requestData.setPosition("QB");
+        mvc.perform(MockMvcRequestBuilders
+            .post("/addplayer")
+            .content(asJsonString(requestData))
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON));
+
         Player BlaineGabbert = new Player();
         BlaineGabbert.setName("Blaine Gabbert");
         BlaineGabbert.setNumber(11);
-        List<Player> players = new ArrayList<Player>();
-        players.add(TomBrady);
-        players.add(BlaineGabbert);
-        Map<String, List<Player>> res = new HashMap<>();
-        res.put("QB", players);
-        Mockito.when(depthChartService.getFullDepthChart()).thenReturn(res);
+        requestData.setPlayer(BlaineGabbert);
+        requestData.setPosition("QB");
         mvc.perform(MockMvcRequestBuilders
-            .post("/getFullDepthChart")
+            .post("/addplayer")
             .content(asJsonString(requestData))
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON));
+        //Mockito.when(depthChartService.getFullDepthChart()).thenReturn(res);
+        mvc.perform(MockMvcRequestBuilders
+            .get("/getFullDepthChart")
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$").isNotEmpty())
-            .andExpect(jsonPath("$.response.StatusCode").isNotEmpty());
+            .andExpect(jsonPath("$.response.StatusCode").isNotEmpty())
+            .andExpect(jsonPath("$.response.StatusCode").value("0"));
     }
 
     public String asJsonString(final Object obj) {
