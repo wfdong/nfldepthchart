@@ -73,13 +73,13 @@ public class DepthChartServiceImplTest {
         assertEquals("11-Blaine Gabbert", backupsTomBrady.get(0));
         assertEquals("2-Kyle Trask", backupsTomBrady.get(1));
 
-        List<String> backupsJaelonDarden = depthChartService.getBackups("QB", JaelonDarden);
+        List<String> backupsJaelonDarden = depthChartService.getBackups("LWR", JaelonDarden);
         assertNotNull(backupsJaelonDarden);
         assertEquals(1, backupsJaelonDarden.size());
-        assertEquals("10-ScottMiller", backupsJaelonDarden.get(0));
+        assertEquals("10-Scott Miller", backupsJaelonDarden.get(0));
 
         List<String> backupsMikeEvans = depthChartService.getBackups("QB", MikeEvans);
-        assertNull(backupsMikeEvans);
+        assertEquals(0, backupsMikeEvans.size());
 
         List<String> backupsBlaineGabbert = depthChartService.getBackups("QB", BlaineGabbert);
         assertNotNull(backupsBlaineGabbert);
@@ -87,7 +87,7 @@ public class DepthChartServiceImplTest {
         assertEquals("2-Kyle Trask", backupsBlaineGabbert.get(0));
 
         List<String> backupsKyleTrask = depthChartService.getBackups("QB", KyleTrask);
-        assertNull(backupsKyleTrask);
+        assertEquals(0, backupsKyleTrask.size());
     }
 
     @Test

@@ -111,8 +111,40 @@ public class DepthChartServiceImpl implements DepthChartService {
 
     @Override
     public List<String> getBackups(String position, Player player) {
-        // TODO Auto-generated method stub
-        return null;
+        List<String> result = new ArrayList<>();
+        if(!NFLUtils.isValidPosition(position) 
+            || player == null
+            || player.getName() == null
+            || player.getNumber() < 0
+            || (player.getPosition()!=null&&!player.getPosition().contains(position))){
+            // if the request parameter is invalid then return null
+            return result;
+        }
+        Team team = dataBaseMock.getTeam();
+        int playerNumber = player.getNumber();
+        Map<String, List<Integer>> players = team.getPlayersOfPosition();
+        Map<Integer, Player> allPlayers = team.getAllPlayers();
+        if (players != null){
+            List<Integer> playersInThisPos = players.get(position);
+            int index = playersInThisPos.indexOf(Integer.valueOf(playerNumber));
+            if(index>=0){
+                if((index+1)<playersInThisPos.size()){
+                    List<Integer> backupNumbers = playersInThisPos.subList(index+1, playersInThisPos.size());
+                    backupNumbers.forEach(item->{
+                        Player tmp = allPlayers.get(item);
+                        if(tmp!=null&&tmp.getName()!=null&&tmp.getNumber()>=0){
+                            // get the info from players map and contruct the return format
+                            result.add(tmp.getNumber()+"-"+tmp.getName());
+                        }
+                    });
+                }else {
+                    return result;
+                }
+            }else {
+                return result;
+            }
+        }
+        return result;
     }
 
     @Override
