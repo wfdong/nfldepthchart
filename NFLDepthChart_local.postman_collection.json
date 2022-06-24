@@ -1,0 +1,331 @@
+{
+	"info": {
+		"_postman_id": "8d058803-671a-4bb5-bafc-ef1492193977",
+		"name": "NFLDepthChart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addplayer_QB_0",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": \"QB\",\n    \"player\": {\n        \"number\":\"12\",\n        \"name\": \"Tom Brady\"\n    },\n    \"positionDepth\":\"0\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/addplayer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"addplayer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addplayer_QB_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": \"QB\",\n    \"player\": {\n        \"number\":\"11\",\n        \"name\": \"Blaine Gabbert\"\n    },\n    \"positionDepth\":\"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/addplayer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"addplayer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addplayer_QB_2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": \"QB\",\n    \"player\": {\n        \"number\":\"2\",\n        \"name\": \"Kyle Trask\"\n    },\n    \"positionDepth\":\"2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/addplayer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"addplayer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addplayer_LWR_0",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": \"LWR\",\n    \"player\": {\n        \"number\":\"13\",\n        \"name\": \"Mike Evans\"\n    },\n    \"positionDepth\":\"0\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/addplayer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"addplayer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addplayer_LWR_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": \"LWR\",\n    \"player\": {\n        \"number\":\"1\",\n        \"name\": \"Jaelon Darden\"\n    },\n    \"positionDepth\":\"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/addplayer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"addplayer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addplayer_LWR_2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": \"LWR\",\n    \"player\": {\n        \"number\":\"10\",\n        \"name\": \"Scott Miller\"\n    },\n    \"positionDepth\":\"2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/addplayer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"addplayer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removePlayer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": \"QB\",\n    \"player\": {\n        \"number\":\"12\",\n        \"name\": \"Tom Brady\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/removeplayer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"removeplayer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getbackups_QB_0",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": \"QB\",\n    \"player\": {\n        \"number\":\"12\",\n        \"name\": \"Tom Brady\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/getbackups",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getbackups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getbackups_QB_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": \"QB\",\n    \"player\": {\n        \"number\":\"11\",\n        \"name\": \"Blaine Gabbert\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/getbackups",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getbackups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getbackups_QB_2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": \"QB\",\n    \"player\": {\n        \"number\":\"2\",\n        \"name\": \"Kyle Trask\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/getbackups",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getbackups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFullDepthChart",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/getFullDepthChart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getFullDepthChart"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

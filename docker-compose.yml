@@ -1,0 +1,25 @@
+services:
+  service1:
+    build: .
+    ports:
+      - "8083:8080"
+    volumes:
+      - .:/code
+  service2:
+    build: .
+    ports:
+      - "8084:8080"
+    volumes:
+      - .:/code
+  service3:
+    build: .
+    ports:
+      - "8085:8080"
+    volumes:
+      - .:/code
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8087:8080"
